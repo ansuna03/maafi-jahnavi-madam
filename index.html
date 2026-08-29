@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From My Heart to Yours 💝</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@300;400&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #948d8fa1, #020000, #ef82c9, #ffe0e6, #fff0f3);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .romantic-font {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(255, 118, 138, 0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .page-title {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+        
+        .message-card {
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            max-width: 800px;
+            transition: all 0.3s ease;
+        }
+        
+        .message-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gif-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .gif-card {
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .gif-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+        }
+        
+        .gif-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .gif-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gif-caption {
+            padding: 1rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .love-letter {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin: 3rem auto;
+            max-width: 700px;
+            padding: 2.5rem;
+            border-radius: 1rem;
+            position: relative;
+        }
+        
+        .love-letter.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .love-letter:before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
+            filter: blur(10px);
+            z-index: -1;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin: 1rem 0.5rem;
+        }
+        
+        .btn-yes {
+            background: linear-gradient(45deg, #ff4b8d, #ff7eb3);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 75, 141, 0.4);
+        }
+        
+        .btn-no {
+            background: linear-gradient(45deg, #a18cd1, #fbc2eb);
+            color: white;
+            box-shadow: 0 4px 15px rgba(161, 140, 209, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .heart {
+            position: fixed;
+            font-size: 1.5rem;
+            animation: float 4s ease-in-out infinite, opacity 4s linear forwards;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-20px) rotate(10deg); }
+            50% { transform: translateY(-40px) rotate(0deg); }
+            75% { transform: translateY(-20px) rotate(-10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+        
+        @keyframes opacity {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        .crying-emoji {
+            position: absolute;
+            top: -50px;
+            animation: fall linear forwards;
+            z-index: 1000;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+        
+        .heartbeat {
+            animation: heartbeat 1.5s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: white;
+            animation: sparkle 1s linear infinite;
+            opacity: 0;
+        }
+        
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .gif-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .gif-card img {
+                height: 200px;
+            }
+            
+            .btn {
+                width: 80%;
+                margin: 0.5rem auto;
+            }
+            
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="page-title romantic-font text-center" style="font-size: 4rem; color: #ff357b;">
+            tumhari chehre ki chamak ke samne sada laga,aasamaan mein chaand pura tha magar aaadha laga, you my prettist girl   <span class="heartbeat" style="display: inline-block;">🙏🏼</span>
+        </h1>
+        
+        <div class="message-card glass-effect">
+            <p class="romantic-font" style="font-size: 2rem; color: #d5365c; line-height: 1.4;">
+                Kaise bataye kyu tujhko chahe yaara baatein dilo ki ye jo hai baki aake tujhe ye samjhaye
+                <br>tu jaane na , Will you find it in your heart to forgive me? 🥺
+            </p>
+        </div>
+        
+        <div class="video-container">
+            <div class="video-card glass-effect">
+                <video src="./cry1.mp4" autoplay loop muted></video>
+                <div class="gif-caption">
+                    <p class="romantic-font" style="font-size: 1.8rem; color: #e84a7f;">Iss innocent```
+                <video src="./cry1.mp4" autoplay loop muted></video>
+                <div class="gif-caption">
+                    <p class="romantic-font" style="font-size: 1.8rem; color: #e84a7f;">Iss innocent bacche ko maaf kar do 💗</p>
+                </div>
+            </div>
+
+            <div class="video-card glass-effect">
+                <video src="./cry5.mp4" autoplay loop muted></video>
+                <div class="gif-caption">
+                    <p class="romantic-font" style="font-size: 1.8rem; color: #e84a7f;">Ye body sirf aur sirf tumhare liye hi bana raha hu i mean tumhein protect karne ke liye naaa 💝</p>
+                </div>
+            </div>
+
+            <div class="video-card glass-effect">
+                <video src="./cry6.mp4" autoplay loop muted></video>
+                <div class="gif-caption">
+                    <p class="romantic-font" style="font-size: 1.8rem; color: #e84a7f;">Monty tak bol raha hai sorry maaaf kar do iss nalayak sushant ko . 💖</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="loveLetter" class="love-letter glass-effect hidden">
+            <h2 class="romantic-font text-center" style="font-size: 2.5rem; color: #ff357b; margin-bottom: 1.5rem;">
+                My Dearest Love ❤️
+            </h2>
+            <p style="font-size: 1.2rem; color: #d5365c; line-height: 1.8; margin-bottom: 1.5rem;">
+                Inn labjo mein ek ansuni batt suni hai,
+                Inn labjo pe ek anboni khwaab likhi hai,
+                In hatho ki lakir mein eshwar ne sirf tera hi naam buna hai,
+                Maine iss barish ke mausam mein sirf aur sirf tera hi hath chuna hai,
+                In badaloo mein chupe aasman ke tahar ek sath chahiye,
+                Iss ansuni dastan mein sirf tera hi sath chahiye!!
+            </p>
+            <p style="font-size: 1.2rem; color: #d5365c; line-height: 1.8; margin-bottom: 1.5rem;">
+                Ek aankh meri ho aur ek aankh teri ho
+                Aur ye adhuri Dastan Puri ho jaye
+                Tere hatho ko thamne ke liye mera dil tarse
+                Teri mohabbat mein mera dil tarse
+                Tumhari iss khubsurat baaton mein hum hamesha khone ka sok rakhte hai,
+                Tumhari aur hamari iss adhuri Dastan ke liye hum tarste ha 
+            </p>
+            <p class="romantic-font text-center" style="font-size: 2rem; color: #ff357b; margin-top: 1.5rem;">
+                Forever Yours 💝
+            </p>
+        </div>
+        
+        <div class="btn-container">
+            <button class="btn btn-yes" onclick="showLoveLetter()">
+                Yes, I Forgive You! 💖
+            </button>
+            <button class="btn btn-no" onclick="showCryingEmojis()">
+                Not Yet... 😢
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Create background hearts
+        function createBackgroundHearts() {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.top = Math.random() * 100 + 'vh';
+                    heart.style.opacity = '0.6';
+                    heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }, i * 300);
+            }
+            
+            setTimeout(createBackgroundHearts, 5000);
+        }
+        
+        // Create sparkles for title
+        function createSparkles() {
+            const title = document.querySelector('.page-title');
+            const rect = title.getBoundingClientRect();
+            
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.classList.add('sparkle');
+                    
+                    // Random position around the title
+                    const x = rect.left + Math.random() * rect.width;
+                    const y = rect.top + Math.random() * rect.height;
+                    
+                    sparkle.style.left = x + 'px';
+                    sparkle.style.top = y + 'px';
+                    document.body.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 1000);
+                }, i * 200);
+            }
+            
+            setTimeout(createSparkles, 1000);
+        }
+        
+        // Show love letter
+        function showLoveLetter() {
+            const letter = document.getElementById('loveLetter');
+            letter.classList.remove('hidden');
+            
+            setTimeout(() => {
+                letter.classList.add('show');
+                
+                // Create floating hearts animation
+                for(let i = 0; i < 50; i++) {
+                    setTimeout(() => {
+                        createFloatingHeart();
+                    }, i * 100);
+                }
+            }, 100);
+            
+            // Add subtle movement to GIF cards
+            const gifCards = document.querySelectorAll('.gif-card');
+            gifCards.forEach(card => {
+                card.style.transform = 'translateY(-10px)';
+                card.style.boxShadow = '0 15px 35px rgba(255, 105, 180, 0.4)';
+            });
+        }
+        
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            const size = Math.random() * 30 + 20;
+            const duration = Math.random() * 4 + 3;
+            const type = Math.random() > 0.5 ? '❤️' : '💖';
+            
+            heart.innerHTML = type;
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = size + 'px';
+            heart.style.animation = `float ${duration}s ease-in-out`;
+            heart.style.transform = 'translateY(0)';
+            heart.style.opacity = '0.8';
+            
+            document.body.appendChild(heart);
+            
+            heart.animate([
+                { transform: 'translateY(0)', opacity: 0 },
+                { transform: 'translateY(-100vh)', opacity: 1 }
+            ], {
+                duration: duration * 1000,
+                easing: 'ease-out'
+            }).onfinish = () => heart.remove();
+        }
+        
+        function showCryingEmojis() {
+            // Create raining crying emojis
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    createCryingEmoji();
+                }, i * 150);
+            }
+            
+            // Redirect after animation
+            setTimeout(() => {
+                window.location.href = 'memory.html';
+            }, 6000);
+        }
+        
+        function createCryingEmoji() {
+            const emoji = document.createElement('div');
+            const size = Math.random() * 25 + 20;
+            const duration = Math.random() * 3 + 2;
+            const types = ['😢', '😭', '💔', '😔'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            
+            emoji.innerHTML = type;
+            emoji.className = 'crying-emoji';
+            emoji.style.left = Math.random() * 100 + 'vw';
+            emoji.style.top = '-50px';
+            emoji.style.fontSize = size + 'px';
+            emoji.style.position = 'fixed';
+            
+            document.body.appendChild(emoji);
+            
+            emoji.animate([
+                { transform: 'translateY(0)' },
+                { transform: 'translateY(100vh)' }
+            ], {
+                duration: duration * 1000,
+                easing: 'cubic-bezier(0.4, 0, 1, 1)'
+            }).onfinish = () => emoji.remove();
+        }
+        
+        // Initialize
+        window.onload = function() {
+            createBackgroundHearts();
+            createSparkles();
+        };
+    </script>
+</body>
+</html>
